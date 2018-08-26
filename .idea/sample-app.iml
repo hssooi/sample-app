@@ -326,6 +326,16 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="capistrano-rbenv-vars (vbundled(0.1.0)) [path][gem]" type="ruby">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.5.0/gems/capistrano-rbenv-vars-0.1.0/lib" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.5.0/gems/capistrano-rbenv-vars-0.1.0/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="capistrano3-puma (vbundled(3.1.1)) [path][gem]" type="ruby">
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.5.0/gems/capistrano3-puma-3.1.1/lib" />
