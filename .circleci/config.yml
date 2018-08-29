@@ -8,12 +8,22 @@ jobs:
     docker:
       # specify the version you desire here
        - image: circleci/ruby:2.5.1-node-browsers
-      
+        environment:
+        - DB_HOST=127.0.0.1
+        - DB_PORT=3306
+        - DB_DATABASE=circleci
+        - DB_USERNAME=circleci
+        - DB_PASSWORD=circleci
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
-
+      - image: circleci/mysql:5.7
+        environment:
+        - MYSQL_ROOT_PASSWORD=circleci
+        - MYSQL_DATABASE=circleci
+        - MYSQL_USER=circleci
+        - MYSQL_PASSWORD=circleci
     working_directory: ~/repo
 
     steps:
@@ -30,6 +40,17 @@ jobs:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+
+      - run:
+          name: Wait for DB
+          # preinstalled in circleci/* docker image
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
 
       - save_cache:
           paths:
